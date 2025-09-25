@@ -122,3 +122,5 @@ Para que o sistema processe Jobs e filas (como a exportação de relatórios), �
 *   **Lógica de Negócio Encapsulada:** Todas as regras de negócio e validações são cuidadosamente encapsuladas nos `Services`, promovendo a organização do código, a facilidade de manutenção e a testabilidade.
 *   **Segurança e Manutenção:** As rotas e funcionalidades principais são protegidas e a estrutura do projeto é pensada para facilitar a manutenção e futuras expansões.
 
+
+# Sistema-de-Gest-o
