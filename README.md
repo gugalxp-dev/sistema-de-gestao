@@ -1,4 +1,5 @@
 # Sistema de Gestão - Documentação Técnica
+![](https://i.ibb.co/vCVj3qQQ/Captura-de-tela-2025-09-25-190739.png)
 
 ## 1. Visão Geral do Projeto
 
