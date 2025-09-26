@@ -92,7 +92,6 @@ Para configurar e executar o projeto localmente, siga os passos abaixo:
     composer install
     php artisan key:generate
     php artisan migrate
-    php artisan storage:link
     php artisan db:seed --class=FakeBigSeeder 
     ⚠️ Importante, o comando 'php artisan db:seed --class=FakeBigSeeder' pode demorar pelo alto volume de dados. Aguarde para seguir!
 
@@ -101,7 +100,6 @@ Para configurar e executar o projeto localmente, siga os passos abaixo:
     *   `php artisan key:generate`: Gera uma chave de aplicação única para o Laravel, essencial para segurança.
     *   `php artisan migrate`: Executa as migrações do banco de dados, criando as tabelas necessárias.
     *   `php artisan db:seed --class=FakeBigSeeder`: Popula o banco de dados com dados de teste, utilizando os *seeders* configurados (importante para testar a exportação de alto volume).
-    * `php artisan storage:link`: Isso cria public/storage apontando para storage/app/public.
 
 ### 4.4. Configuração do Frontend
 
