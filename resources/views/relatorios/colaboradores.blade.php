@@ -51,7 +51,6 @@
         <table class="table table-bordered table-striped mt-3">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
                     <th>Nome</th>
                     <th>Email</th>
                     <th>CPF</th>
@@ -62,7 +61,6 @@
             <tbody>
                 @forelse($colaboradores as $colaborador)
                     <tr>
-                        <td>{{ $colaborador->id }}</td>
                         <td>{{ $colaborador->nome }}</td>
                         <td>{{ $colaborador->email }}</td>
                         <td>{{ $colaborador->cpf }}</td>

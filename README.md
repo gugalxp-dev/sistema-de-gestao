@@ -64,14 +64,22 @@ Para configurar e executar o projeto localmente, siga os passos abaixo:
 ### 4.1. Clonagem do Repositório
 
 1.  Abra o terminal e clone o repositório do projeto:
-    ```bash
-    git clone <repo_url>
-    cd <project_folder>
     ```
-
+    git clone https://github.com/gugalxp-dev/sistema-de-gestao.git
+    ```
+    ##### Acesse a pasta:
+    ```
+    cd sistema-de-gestao
+    ```
+    ##### Abra o projeto no vs code
+    ```
+    code .
+    ```
 ### 4.2. Configuração do Ambiente
 
 1.  Crie o arquivo de variáveis de ambiente `.env` na raiz do projeto, copiando o conteúdo de `.env.example`. Este arquivo contém todas as credenciais e configurações necessárias.
+
+    Com o docker desktop aberto, rode ```docker-compose up -d --build```
 
 ### 4.3. Instalação de Dependências PHP
 
@@ -84,12 +92,16 @@ Para configurar e executar o projeto localmente, siga os passos abaixo:
     composer install
     php artisan key:generate
     php artisan migrate
-    php artisan db:seed
+    php artisan storage:link
+    php artisan db:seed --class=FakeBigSeeder 
+    ⚠️ Importante, o comando 'php artisan db:seed --class=FakeBigSeeder' pode demorar pelo alto volume de dados. Aguarde para seguir!
+
     ```
     *   `composer install`: Instala todas as dependências PHP definidas no `composer.json`.
     *   `php artisan key:generate`: Gera uma chave de aplicação única para o Laravel, essencial para segurança.
     *   `php artisan migrate`: Executa as migrações do banco de dados, criando as tabelas necessárias.
-    *   `php artisan db:seed`: Popula o banco de dados com dados de teste, utilizando os *seeders* configurados (importante para testar a exportação de alto volume).
+    *   `php artisan db:seed --class=FakeBigSeeder`: Popula o banco de dados com dados de teste, utilizando os *seeders* configurados (importante para testar a exportação de alto volume).
+    * `php artisan storage:link`: Isso cria public/storage apontando para storage/app/public.
 
 ### 4.4. Configuração do Frontend
 
@@ -102,15 +114,26 @@ Para configurar e executar o projeto localmente, siga os passos abaixo:
     *   `npm install`: Instala todas as dependências JavaScript/Node.js definidas no `package.json`.
     *   `npm run dev`: Compila os assets do frontend e os monitora para alterações durante o desenvolvimento.
 
-### 4.5. Processamento de Jobs e Filas
+### 4.5. Por último, processamento de Jobs e Filas
 
-Para que o sistema processe Jobs e filas (como a exportação de relatórios), é necessário iniciar o *worker* de filas. Para testar a exportação de alto volume, certifique-se de ter rodado o `db:seed` previamente.
+Para que o sistema processe Jobs e filas (como a exportação de relatórios), é necessário iniciar o *worker* de filas. Para testar a exportação de alto volume, certifique-se de ter rodado o `php artisan db:seed --class=FakeBigSeeder` previamente.
 
 1.  Execute o seguinte comando em um terminal separado (pode ser dentro do container Docker PHP ou em um processo local que tenha acesso ao ambiente Laravel):
-    ```bash
+    
+    ```
     php artisan queue:work
     ```
     *   Este comando inicia um processo que monitora a fila e executa os jobs pendentes.
+
+### ✅  Feito isso, basta acessar:
+
+Admin do MYSQL http://localhost:8081
+
+Plataforma http://localhost:8080
+
+**Crie sua conta, e pode testar!**
+
+Garanta que a fila está rodando para testar a exportação!
 
 ## 5. Observações Importantes e Destaques
 
@@ -122,6 +145,3 @@ Para que o sistema processe Jobs e filas (como a exportação de relatórios), �
 *   **Autenticação Completa:** O sistema integra um sistema de autenticação completo fornecido pelo Laravel Breeze, cobrindo registro, login e gerenciamento de perfil de forma segura e eficiente.
 *   **Lógica de Negócio Encapsulada:** Todas as regras de negócio e validações são cuidadosamente encapsuladas nos `Services`, promovendo a organização do código, a facilidade de manutenção e a testabilidade.
 *   **Segurança e Manutenção:** As rotas e funcionalidades principais são protegidas e a estrutura do projeto é pensada para facilitar a manutenção e futuras expansões.
-
-
-# Sistema-de-Gest-o
