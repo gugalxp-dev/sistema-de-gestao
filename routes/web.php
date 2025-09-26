@@ -26,6 +26,9 @@ Route::middleware('auth')->group(function () {
     
     Route::get('relatorios/colaboradores', [RelatorioController::class, 'index'])->name('relatorios.colaboradores');
     Route::post('relatorios/colaboradores/export', [RelatorioController::class, 'export'])->name('relatorios.colaboradores.export');
+    Route::get('/relatorios/download/{fileName}', [RelatorioController::class, 'download'])
+        ->where('fileName', '.*')
+        ->name('relatorios.download');
 });
 
 require __DIR__.'/auth.php';
