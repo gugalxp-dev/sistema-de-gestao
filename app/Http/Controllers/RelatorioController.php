@@ -35,10 +35,22 @@ class RelatorioController extends Controller
 
             return response()->json([
                 'message' => 'Exportação iniciada',
-                'download_url' => asset("storage/exports/{$fileName}.xlsx"),
+                'file_name' => $fileName,
             ]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
     }
+
+    public function download(string $fileName)
+    {
+        $filePath = storage_path("app/public/exports/{$fileName}.xlsx");
+
+        if (!file_exists($filePath)) {
+            abort(404, 'Arquivo não encontrado.');
+        }
+
+        return response()->download($filePath);
+    }
+
 }

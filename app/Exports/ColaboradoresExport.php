@@ -9,11 +9,11 @@ use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class ColaboradoresExport implements FromQuery, WithChunkReading, WithHeadings, WithMapping
+class ColaboradoresExport implements FromQuery, WithMapping, WithHeadings, WithChunkReading
 {
     protected $colaboradorIds;
 
-    public function __construct($colaboradorIds = null)
+    public function __construct(array $colaboradorIds = [])
     {
         $this->colaboradorIds = $colaboradorIds;
     }
@@ -31,7 +31,7 @@ class ColaboradoresExport implements FromQuery, WithChunkReading, WithHeadings, 
                 'colaboradores.created_at'
             );
 
-        if ($this->colaboradorIds) {
+        if (!empty($this->colaboradorIds)) {
             $query->whereIn('colaboradores.id', $this->colaboradorIds);
         }
 

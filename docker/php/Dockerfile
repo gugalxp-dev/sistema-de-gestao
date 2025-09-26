@@ -22,8 +22,9 @@ WORKDIR /var/www/html
 
 COPY . .
 
-# Permissões
-RUN chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
+# Copia entrypoint
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["php-fpm"]

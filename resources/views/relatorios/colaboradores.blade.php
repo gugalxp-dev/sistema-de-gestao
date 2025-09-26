@@ -51,7 +51,6 @@
         <table class="table table-bordered table-striped mt-3">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
                     <th>Nome</th>
                     <th>Email</th>
                     <th>CPF</th>
@@ -62,7 +61,6 @@
             <tbody>
                 @forelse($colaboradores as $colaborador)
                     <tr>
-                        <td>{{ $colaborador->id }}</td>
                         <td>{{ $colaborador->nome }}</td>
                         <td>{{ $colaborador->email }}</td>
                         <td>{{ $colaborador->cpf }}</td>
@@ -82,9 +80,9 @@
     <script>
         document.getElementById('exportBtn').addEventListener('click', function() {
             const btn = this;
-            btn.disabled = true;
             const status = document.getElementById('exportStatus');
-            status.textContent = 'Gerando arquivo, aguarde...';
+            btn.disabled = true;
+            status.textContent = 'Gerando arquivo...';
 
             fetch("{{ route('relatorios.colaboradores.export') }}", {
                     method: 'POST',
@@ -99,17 +97,22 @@
                         status.textContent = res.error;
                         btn.disabled = false;
                     } else {
+                        const fileUrl = "/storage/exports/" + res.file_name + ".xlsx";
+
+                        // checa se o arquivo existe a cada 2s
                         const interval = setInterval(() => {
-                            fetch(res.download_url)
+                            fetch(fileUrl, {
+                                    method: 'HEAD'
+                                })
                                 .then(r => {
                                     if (r.ok) {
                                         clearInterval(interval);
-                                        status.textContent = '';
+                                        status.textContent = 'Download iniciado!';
                                         btn.disabled = false;
 
                                         const a = document.createElement('a');
-                                        a.href = res.download_url;
-                                        a.download = res.download_url.split('/').pop();
+                                        a.href = fileUrl;
+                                        a.download = res.file_name + ".xlsx";
                                         document.body.appendChild(a);
                                         a.click();
                                         a.remove();
