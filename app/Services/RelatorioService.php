@@ -58,6 +58,6 @@ class RelatorioService
 
         ExportColaboradoresJob::dispatch($fileName, $colaboradores->pluck('id')->toArray());
 
-        return $fileName; // só o nome do arquivo
+        return $fileName;
     }
 }

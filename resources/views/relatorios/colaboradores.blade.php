@@ -99,7 +99,6 @@
                     } else {
                         const fileUrl = "/storage/exports/" + res.file_name + ".xlsx";
 
-                        // checa se o arquivo existe a cada 2s
                         const interval = setInterval(() => {
                             fetch(fileUrl, {
                                     method: 'HEAD'

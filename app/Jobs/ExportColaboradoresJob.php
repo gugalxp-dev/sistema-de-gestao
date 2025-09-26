@@ -26,7 +26,6 @@ class ExportColaboradoresJob implements ShouldQueue
 
     public function handle()
     {
-        // Salva direto na pasta public/exports
         Excel::store(new ColaboradoresExport($this->colaboradorIds), "public/exports/{$this->fileName}.xlsx");
     }
 }
