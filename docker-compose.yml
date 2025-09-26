@@ -9,7 +9,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./:/var/www/html
-      - ./storage:/var/www/html/storage
       - ./custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini
     networks:
       - laravel
